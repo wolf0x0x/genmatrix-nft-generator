@@ -2398,8 +2398,8 @@ const GenMatrixShell = () => {
                 <div className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-950 shadow-2xl shadow-indigo-950/20">
                   <video
                     className="aspect-video w-full bg-gray-950 object-cover"
-                    src="/genmatrix-how-it-works.mp4"
-                    poster="/genmatrix-how-it-works-poster.png"
+                    src={`${import.meta.env.BASE_URL}genmatrix-how-it-works.mp4`}
+                    poster={`${import.meta.env.BASE_URL}genmatrix-how-it-works-poster.png`}
                     aria-label="How GenMatrix Works product walkthrough video"
                     autoPlay
                     muted
