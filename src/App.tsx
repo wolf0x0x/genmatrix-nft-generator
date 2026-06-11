@@ -2435,15 +2435,15 @@ const GenMatrixShell = () => {
                 </div>
                 <h2 className="mb-4 text-3xl font-black tracking-tight text-white sm:text-4xl">Free NFT Generator for Art, Designer Toys, 3D Collectibles and Blockchain Drops</h2>
                 <p className="leading-relaxed text-gray-400">
-                  GenMatrix helps creators turn layered art, 潮玩 assets, character traits, 3D NFT renders, PFP collections, and digital collectibles into organized Web3 drops. The workflow stays local in the browser while still producing clean image batches, DNA records, rarity reports, and metadata for blockchain publishing.
+                  GenMatrix helps creators turn layered art, designer toy assets, character traits, 3D NFT renders, PFP collections, and digital collectibles into organized Web3 drops. The workflow stays local in the browser while still producing clean image batches, DNA records, rarity reports, and metadata for blockchain publishing.
                 </p>
               </div>
               <div className="grid grid-cols-1 gap-4 lg:col-span-7 sm:grid-cols-2">
                 {[
-                  { title: '艺术 / Art', body: 'Layer illustrations, character art, generative artwork, digital fashion, and collectible visual systems.' },
-                  { title: '潮玩 / Designer Toys', body: 'Toy-style traits, accessories, materials, props, character variants, blind-box rarity and premium editions.' },
+                  { title: 'Art', body: 'Layer illustrations, character art, generative artwork, digital fashion, and collectible visual systems.' },
+                  { title: 'Designer Toys', body: 'Toy-style traits, accessories, materials, props, character variants, blind-box rarity and premium editions.' },
                   { title: '3D NFT', body: 'Rendered 3D collectibles, avatar turns, object variations, background sets, and preview-friendly export batches.' },
-                  { title: '区块链 / Blockchain', body: 'Marketplace metadata for ERC-721, Solana, BSC and Web3 community minting pipelines.' },
+                  { title: 'Blockchain', body: 'Marketplace metadata for ERC-721, Solana, BSC and Web3 community minting pipelines.' },
                 ].map((item) => (
                   <div key={item.title} className="rounded-2xl border border-gray-800 bg-gray-900/45 p-5">
                     <h3 className="mb-2 text-base font-black text-white">{item.title}</h3>
