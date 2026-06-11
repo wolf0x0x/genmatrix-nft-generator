@@ -719,7 +719,7 @@ const NFTGenerator = () => {
         return;
     }
 
-    if(!confirm("Apply high-contrast rarity optimization?\n\nStrategy:\n1. Base layers will be evenly weighted for diverse core characters.\n2. Accessory layers will increase the Empty trait weight to about 70%-90%.\n\nResult:\n- N/R tiers usually stay cleaner with fewer accessories.\n- SSR/UR tiers have a small chance to combine multiple accessories for premium looks.\n\nThis action cannot be undone.")) return;
+    if(!confirm("Apply high-contrast rarity optimization?\n\nStrategy:\n1. Base layers will be evenly weighted for diverse core characters.\n2. Accessory layers will increase the Empty trait weight to about 70%-90%.\n\nResult:\n- N/R tiers usually stay cleaner with fewer accessories.\n- SSR/UR tiers have a small chance to combine multiple accessories for standout looks.\n\nThis action cannot be undone.")) return;
 
     // 预计算规则负担 (用于补偿那些容易被Exclude掉的组件)
     const ruleBurdenMap = new Map<string, number>();
@@ -1934,6 +1934,9 @@ if (config.metadataFormat === 'SOL') {
                </span>
                <span className="font-mono font-bold text-violet-600">{exportProgress}%</span>
            </div>
+           <div className="mt-4 border-t border-gray-100 pt-4">
+              <AdPlaceholder label="Sponsored Space" caption="Visible while large exports are processing" className="h-24 border-gray-200 bg-[repeating-linear-gradient(45deg,#f9fafb,#f9fafb_10px,#f3f4f6_10px,#f3f4f6_20px)]" />
+           </div>
         </div>
       )}
 
@@ -2150,6 +2153,17 @@ if (config.metadataFormat === 'SOL') {
       {/* Sidebar Area */}
       {renderSidebar()}
 
+      {activeTab === 'editor' && (
+        <aside className="hidden w-[336px] shrink-0 border-r border-gray-200 bg-gray-50/90 p-5 2xl:flex">
+          <div className="sticky top-5 w-full space-y-3">
+            <AdPlaceholder label="Sponsored Space" caption="300 x 600 sidebar placement" className="mx-auto h-[600px] w-[300px] border-gray-300 bg-[repeating-linear-gradient(45deg,#ffffff,#ffffff_10px,#f3f4f6_10px,#f3f4f6_20px)]" />
+            <p className="mx-auto max-w-[300px] text-[10px] leading-relaxed text-gray-400">
+              This ad area stays separate from upload, generate, and export controls.
+            </p>
+          </div>
+        </aside>
+      )}
+
       {/* Main Area */}
       <div className="flex-1 flex flex-col bg-gray-50 relative h-full">
         {activeTab === 'editor' && renderEditorWorkspace()}
@@ -2255,6 +2269,9 @@ if (config.metadataFormat === 'SOL') {
                                     <div className="w-16 h-16 border-4 border-violet-200 border-t-violet-600 rounded-full animate-spin"></div>
                                 </div>
                                 <p className="text-sm font-bold text-gray-500 animate-pulse">Generating {config.totalSupply} NFTs, please wait...</p>
+                                <div className="w-full max-w-lg px-4 pt-2">
+                                  <AdPlaceholder label="Sponsored Space" caption="Large collections can take a moment to generate" className="h-32 border-gray-300 bg-[repeating-linear-gradient(45deg,#ffffff,#ffffff_10px,#f3f4f6_10px,#f3f4f6_20px)]" />
+                                </div>
                             </div>
                         ) : generatedCollection.length === 0 ? (
                             <div className="h-full flex flex-col items-center justify-center text-gray-300 min-h-[300px]">
@@ -2329,7 +2346,7 @@ const tutorialTopics: TutorialTopic[] = [
     excerpt: 'Set trait odds that feel collectible, fair, and easy to review without turning your art direction into spreadsheet chaos.',
     audience: 'creators who want rarity to support the artwork instead of making the collection feel random',
     outcome: 'a rarity plan with strong common pieces, meaningful rare traits, and fewer awkward over-stacked outputs',
-    example: 'optional accessories that appear less often than base traits, with ultra-rare accents reserved for premium looks',
+    example: 'optional accessories that appear less often than base traits, with ultra-rare accents reserved for standout looks',
     commonMistake: 'making every exciting trait extremely rare and leaving the common outputs looking plain or unfinished',
     proTip: 'generate small preview batches and judge the collection by eye before trusting the numbers',
     screenshotTitle: 'Rarity planning view',
@@ -2339,7 +2356,7 @@ const tutorialTopics: TutorialTopic[] = [
     title: 'ERC-721 vs ERC-1155 Metadata: A Plain-English Comparison',
     category: 'Metadata',
     excerpt: 'Understand when to use unique NFT metadata, edition-style metadata, and how each format affects marketplace display.',
-    audience: 'artists and project owners deciding how their collection should be represented before minting or upload',
+    audience: 'artists and project owners deciding how their collection should be represented before publishing or upload',
     outcome: 'a practical understanding of token IDs, image links, attributes, editions, and collection structure',
     example: 'a 10,000 item PFP collection using one metadata file per token versus an editioned poster drop',
     commonMistake: 'choosing a contract format before deciding whether every item is unique or part of an edition',
@@ -2637,7 +2654,7 @@ const GenMatrixShell = () => {
               <div className="grid grid-cols-1 gap-4 lg:col-span-7 sm:grid-cols-2">
                 {[
                   { title: 'Art', body: 'Build collections from illustrations, character art, digital fashion, and generative visual systems.' },
-                  { title: 'Designer Toys', body: 'Mix toy-style traits, accessories, materials, props, character variants, and premium editions.' },
+                  { title: 'Designer Toys', body: 'Mix toy-style traits, accessories, materials, props, character variants, and limited editions.' },
                   { title: '3D Collectibles', body: 'Use rendered 3D characters, object variations, avatar turns, and background sets.' },
                   { title: 'NFT Metadata', body: 'Export structured metadata for ERC-721, Solana, BSC, and marketplace upload workflows.' },
                 ].map((item) => (
@@ -2793,7 +2810,7 @@ const GenMatrixShell = () => {
                 GenMatrix is designed with creator privacy in mind. Collection generation runs locally in the browser, and imported artwork stays on the user's device unless the user exports or uploads it elsewhere.
               </p>
               <p className="mb-3">
-                <strong className="text-gray-200">Cookies and Web Beacons:</strong> Placeholder advertising areas are included for layout planning. If real advertising scripts are added later, cookie notices and applicable regional consent handling should be configured before deployment.
+                <strong className="text-gray-200">Cookies and Web Beacons:</strong> Google AdSense may use cookies or similar technologies to measure and serve ads. Regional consent handling should be reviewed for each market where the site is promoted.
               </p>
               <p>
                 <strong className="text-gray-200">Local Storage:</strong> Project configuration and cached assets may be stored in browser local storage or IndexedDB to restore work between sessions.
@@ -2802,8 +2819,11 @@ const GenMatrixShell = () => {
             <hr className="border-gray-800" />
             <div>
               <h2 className="mb-2 text-xl font-black text-white">Terms of Service</h2>
-              <p>
+              <p className="mb-3">
                 By using this browser-based collection generator, you are responsible for the artwork, metadata, and collection assets you import or export. GenMatrix claims no ownership over user-provided art layers or generated outputs.
+              </p>
+              <p>
+                GenMatrix is a creator productivity tool for organizing artwork, generating image batches, and exporting metadata. It does not provide financial advice, investment guidance, token sale support, trading tools, or promises about market value.
               </p>
             </div>
           </div>
@@ -2829,7 +2849,7 @@ const GenMatrixShell = () => {
                 <div>
                   <h4 className="mb-2 font-bold text-gray-300">About GenMatrix Project</h4>
                   <p className="max-w-sm leading-relaxed">
-                    GenMatrix is a free browser tool for building NFT collections from layered art, 3D collectibles, and designer toy assets.
+                    GenMatrix is a free creator productivity tool for building NFT collections from layered art, 3D collectibles, and designer toy assets.
                   </p>
                 </div>
                 <div className="md:text-right">
