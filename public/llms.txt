@@ -1,0 +1,17 @@
+# GenMatrix NFT Generator
+
+GenMatrix is a free browser-based NFT generator for artists, designer toy creators, 3D collectible teams, blockchain projects, and Web3 communities.
+
+Primary topics:
+- Free NFT generator
+- NFT art generator
+- Designer toy and art toy collection workflow
+- 3D NFT and digital collectible generation
+- Blockchain marketplace metadata
+- Rarity rules, layer art, trait compatibility, DNA export
+- 艺术, 潮玩, 3D NFT, 区块链, 免费
+
+The app runs locally in the browser. Imported artwork stays on the user's device unless the user exports or uploads files elsewhere.
+
+Canonical URL:
+https://wolf0x0x.github.io/genmatrix-nft-generator/

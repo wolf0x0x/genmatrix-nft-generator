@@ -2358,13 +2358,13 @@ const GenMatrixShell = () => {
             <div className="relative z-10 mx-auto max-w-7xl">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-800/70 bg-indigo-950/60 px-4 py-1.5">
                 <span className="h-2 w-2 rounded-full bg-indigo-400 animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-wide text-indigo-300">Free Web3 Layer Compiling Suite</span>
+                <span className="text-xs font-bold uppercase tracking-wide text-indigo-300">Free Web3 NFT Art & Designer Toy Generator</span>
               </div>
               <h1 className="mx-auto mb-6 max-w-4xl text-4xl font-black tracking-tight sm:text-6xl">
-                Generate Thousands of <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">NFT Collectibles</span> Instantly
+                Generate Free <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">NFT Art, 3D Collectibles & Designer Toys</span> Instantly
               </h1>
               <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-gray-400">
-                GenMatrix is a browser-based layer art generator for NFT creators, digital collectible teams, and Web3 communities. Build rarity rules, preview results, and export marketplace-ready metadata.
+                GenMatrix is a free browser-based NFT generator for artists, designer toy creators, 3D collectible teams, blockchain projects, and Web3 communities. Build rarity rules, preview results, and export marketplace-ready metadata.
               </p>
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <button onClick={launchGenerator} className="flex w-full items-center justify-center gap-3 rounded-xl bg-white px-8 py-4 font-black text-gray-950 shadow-xl transition-all hover:bg-gray-100 sm:w-auto">
@@ -2387,7 +2387,7 @@ const GenMatrixShell = () => {
                 </div>
                 <h2 className="mb-4 text-3xl font-black tracking-tight text-white sm:text-4xl">How GenMatrix Works</h2>
                 <p className="mb-6 leading-relaxed text-gray-400">
-                  Prepare layered artwork, configure probability and rules, generate an NFT collection, then export production assets and metadata for marketplaces or community drops.
+                  Prepare layered artwork, 3D collectible renders, art toy traits, or digital fashion assets; configure probability and rules; generate an NFT collection; then export production assets and blockchain-ready metadata for marketplaces or community drops.
                 </p>
                 <button onClick={launchGenerator} className="inline-flex items-center gap-2 rounded-xl border border-gray-700 bg-gray-900 px-5 py-3 text-sm font-bold text-gray-200 transition-all hover:bg-gray-800">
                   <Rocket size={16} className="text-indigo-300" />
@@ -2414,9 +2414,9 @@ const GenMatrixShell = () => {
 
           <section className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 pb-16 sm:px-6 md:grid-cols-3 lg:px-8">
             {[
-              { icon: SlidersHorizontal, color: 'text-indigo-400', title: 'Custom Rarity Weights', body: 'Define exact percentage distributions for ultra-rare traits, common base traits, or optional cosmetic accessories without spreadsheet work.' },
-              { icon: Sparkles, color: 'text-purple-400', title: 'Exclusion Trait Rules', body: 'Prevent graphic overlaps. Set clean logical rules so headwear, hair, masks, and accessories never collide visually.' },
-              { icon: Terminal, color: 'text-pink-400', title: 'Standard Metadata', body: 'Export universal ERC-721, Solana, or BSC JSON structures with production image batches ready for marketplace pipelines.' },
+              { icon: SlidersHorizontal, color: 'text-indigo-400', title: 'Custom Rarity Weights', body: 'Define exact percentage distributions for ultra-rare traits, common base traits, art toy accessories, 3D NFT variations, or optional cosmetic layers without spreadsheet work.' },
+              { icon: Sparkles, color: 'text-purple-400', title: 'Exclusion Trait Rules', body: 'Prevent graphic overlaps. Set clean logical rules so headwear, hair, masks, props, toy parts, and accessories never collide visually.' },
+              { icon: Terminal, color: 'text-pink-400', title: 'Blockchain Metadata', body: 'Export universal ERC-721, Solana, or BSC JSON structures with production image batches ready for NFT marketplace and blockchain pipelines.' },
             ].map((feature) => (
               <div key={feature.title} className="rounded-2xl border border-gray-800 bg-gray-900/45 p-6">
                 <feature.icon className={`mb-4 ${feature.color}`} size={32} />
@@ -2424,6 +2424,55 @@ const GenMatrixShell = () => {
                 <p className="text-sm leading-relaxed text-gray-400">{feature.body}</p>
               </div>
             ))}
+          </section>
+
+          <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+              <div className="lg:col-span-5">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-800/70 bg-indigo-950/60 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-indigo-300">
+                  <Sparkles size={14} />
+                  SEO Ready NFT Workflow
+                </div>
+                <h2 className="mb-4 text-3xl font-black tracking-tight text-white sm:text-4xl">Free NFT Generator for Art, Designer Toys, 3D Collectibles and Blockchain Drops</h2>
+                <p className="leading-relaxed text-gray-400">
+                  GenMatrix helps creators turn layered art, 潮玩 assets, character traits, 3D NFT renders, PFP collections, and digital collectibles into organized Web3 drops. The workflow stays local in the browser while still producing clean image batches, DNA records, rarity reports, and metadata for blockchain publishing.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 gap-4 lg:col-span-7 sm:grid-cols-2">
+                {[
+                  { title: '艺术 / Art', body: 'Layer illustrations, character art, generative artwork, digital fashion, and collectible visual systems.' },
+                  { title: '潮玩 / Designer Toys', body: 'Toy-style traits, accessories, materials, props, character variants, blind-box rarity and premium editions.' },
+                  { title: '3D NFT', body: 'Rendered 3D collectibles, avatar turns, object variations, background sets, and preview-friendly export batches.' },
+                  { title: '区块链 / Blockchain', body: 'Marketplace metadata for ERC-721, Solana, BSC and Web3 community minting pipelines.' },
+                ].map((item) => (
+                  <div key={item.title} className="rounded-2xl border border-gray-800 bg-gray-900/45 p-5">
+                    <h3 className="mb-2 text-base font-black text-white">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-gray-400">{item.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="mx-auto max-w-5xl px-4 pb-16 sm:px-6 lg:px-8">
+            <div className="mb-6 text-center">
+              <h2 className="mb-3 text-3xl font-black tracking-tight text-white">NFT Generator FAQ</h2>
+              <p className="text-sm leading-relaxed text-gray-400">
+                Quick answers for creators comparing free NFT generators, art toy pipelines, 3D NFT tooling, and blockchain metadata export.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {[
+                { question: 'Is GenMatrix free to use?', answer: 'Yes. GenMatrix runs in the browser and provides free NFT collection generation, rarity rules, previews, image export, and metadata packaging.' },
+                { question: 'What NFT projects can it support?', answer: 'It supports layered art, PFP projects, designer toy and art toy collections, 3D collectible renders, Web3 community drops, and blockchain marketplace metadata workflows.' },
+                { question: 'Does my imported artwork leave my device?', answer: 'Generation runs locally in the browser. Imported artwork stays on your device unless you choose to export, upload, or publish files elsewhere.' },
+              ].map((item) => (
+                <div key={item.question} className="rounded-2xl border border-gray-800 bg-gray-900/45 p-5">
+                  <h3 className="mb-2 text-base font-black text-white">{item.question}</h3>
+                  <p className="text-sm leading-relaxed text-gray-400">{item.answer}</p>
+                </div>
+              ))}
+            </div>
           </section>
 
         </main>
