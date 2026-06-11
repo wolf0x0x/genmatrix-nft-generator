@@ -2431,11 +2431,11 @@ const GenMatrixShell = () => {
               <div className="lg:col-span-5">
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-800/70 bg-indigo-950/60 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-indigo-300">
                   <Sparkles size={14} />
-                  SEO Ready NFT Workflow
+                  Built for Creative Drops
                 </div>
-                <h2 className="mb-4 text-3xl font-black tracking-tight text-white sm:text-4xl">Free NFT Generator for Art, Designer Toys, 3D Collectibles and Blockchain Drops</h2>
+                <h2 className="mb-4 text-3xl font-black tracking-tight text-white sm:text-4xl">Create Art, Designer Toy and 3D NFT Collections Without Heavy Tooling</h2>
                 <p className="leading-relaxed text-gray-400">
-                  GenMatrix helps creators turn layered art, designer toy assets, character traits, 3D NFT renders, PFP collections, and digital collectibles into organized Web3 drops. The workflow stays local in the browser while still producing clean image batches, DNA records, rarity reports, and metadata for blockchain publishing.
+                  GenMatrix helps creators turn layered artwork, designer toy assets, character traits, 3D renders, PFP collections, and digital collectibles into organized Web3 drops. The workflow stays local in the browser while still producing clean image batches, DNA records, rarity reports, and blockchain-ready metadata.
                 </p>
               </div>
               <div className="grid grid-cols-1 gap-4 lg:col-span-7 sm:grid-cols-2">
