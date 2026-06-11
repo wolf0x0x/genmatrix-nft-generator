@@ -2288,7 +2288,7 @@ if (config.metadataFormat === 'SOL') {
   );
 };
 
-type SitePage = 'home' | 'generator' | 'guide' | 'legal';
+type SitePage = 'home' | 'generator' | 'guide' | 'tutorials' | 'legal';
 
 const AdPlaceholder = ({ label, caption, className = '' }: { label: string; caption?: string; className?: string }) => (
   <div className={`border border-gray-800 rounded-xl bg-[repeating-linear-gradient(45deg,#111827,#111827_10px,#1f2937_10px,#1f2937_20px)] flex flex-col items-center justify-center text-center p-2 ${className}`}>
@@ -2297,12 +2297,208 @@ const AdPlaceholder = ({ label, caption, className = '' }: { label: string; capt
   </div>
 );
 
+interface TutorialTopic {
+  title: string;
+  category: string;
+  excerpt: string;
+  audience: string;
+  outcome: string;
+  example: string;
+  commonMistake: string;
+  proTip: string;
+  screenshotTitle: string;
+  screenshotSteps: string[];
+}
+
+const tutorialTopics: TutorialTopic[] = [
+  {
+    title: 'How to Design NFT Layered Artwork from Scratch',
+    category: 'Artwork Setup',
+    excerpt: 'Plan clean layer folders, trait names, canvas size, and visual rules before you generate a full NFT collection.',
+    audience: 'artists, illustrators, toy designers, and small studios starting with a blank canvas',
+    outcome: 'a clean layer system that imports smoothly, mixes reliably, and creates metadata collectors can understand',
+    example: 'a character collection with Background, Body, Outfit, Eyes, Mouth, Headwear, and Accessories folders',
+    commonMistake: 'cropping every trait to its visible pixels, which makes hats, eyes, props, and effects shift out of alignment',
+    proTip: 'build five finished sample characters first, then break them into layers after the style feels consistent',
+    screenshotTitle: 'Layer folder setup',
+    screenshotSteps: ['Background', 'Body', 'Outfit', 'Eyes', 'Mouth', 'Accessories'],
+  },
+  {
+    title: 'NFT Rarity Setup Best Practices',
+    category: 'Rarity',
+    excerpt: 'Set trait odds that feel collectible, fair, and easy to review without turning your art direction into spreadsheet chaos.',
+    audience: 'creators who want rarity to support the artwork instead of making the collection feel random',
+    outcome: 'a rarity plan with strong common pieces, meaningful rare traits, and fewer awkward over-stacked outputs',
+    example: 'optional accessories that appear less often than base traits, with ultra-rare accents reserved for premium looks',
+    commonMistake: 'making every exciting trait extremely rare and leaving the common outputs looking plain or unfinished',
+    proTip: 'generate small preview batches and judge the collection by eye before trusting the numbers',
+    screenshotTitle: 'Rarity planning view',
+    screenshotSteps: ['Base traits', 'Empty traits', 'Rare accents', 'Preview', 'Counts', 'Adjust'],
+  },
+  {
+    title: 'ERC-721 vs ERC-1155 Metadata: A Plain-English Comparison',
+    category: 'Metadata',
+    excerpt: 'Understand when to use unique NFT metadata, edition-style metadata, and how each format affects marketplace display.',
+    audience: 'artists and project owners deciding how their collection should be represented before minting or upload',
+    outcome: 'a practical understanding of token IDs, image links, attributes, editions, and collection structure',
+    example: 'a 10,000 item PFP collection using one metadata file per token versus an editioned poster drop',
+    commonMistake: 'choosing a contract format before deciding whether every item is unique or part of an edition',
+    proTip: 'keep metadata names and attributes clean first; contract decisions become easier when the files are organized',
+    screenshotTitle: 'Metadata export comparison',
+    screenshotSteps: ['Name', 'Image URI', 'Attributes', 'Token ID', 'Edition', 'Upload'],
+  },
+  {
+    title: 'How Independent Artists Can Launch a 10K Project with GenMatrix',
+    category: 'Launch Plan',
+    excerpt: 'A realistic production plan for solo creators moving from artwork folders to a complete 10K NFT collection.',
+    audience: 'independent artists who need a practical collection workflow without a large production team',
+    outcome: 'a repeatable plan for concept design, layer testing, rarity review, export, backup, and launch preparation',
+    example: 'a solo artist testing 100 previews, then 1,000 previews, before exporting the final 10,000 item set',
+    commonMistake: 'trying to generate the full supply before testing whether the layers, names, and rarity rules work together',
+    proTip: 'treat the first week as a prototype sprint and only scale up after the small batch looks strong',
+    screenshotTitle: '10K project checklist',
+    screenshotSteps: ['Concept', 'Layers', 'Rarity', 'Preview', 'Export', 'Launch'],
+  },
+  {
+    title: 'How to Prepare 3D Renders for an NFT Collection Generator',
+    category: '3D Workflow',
+    excerpt: 'Turn 3D characters, props, material variants, and render passes into clean assets for browser-based collection generation.',
+    audience: '3D artists using Blender, Cinema 4D, Maya, or similar tools to create collectible renders',
+    outcome: 'consistent transparent render layers that line up correctly and stay readable at marketplace thumbnail size',
+    example: 'a toy character with separate body material, face plate, outfit, prop, background, and effect passes',
+    commonMistake: 'changing camera position, lighting, or canvas size between renders and making layers impossible to align',
+    proTip: 'lock the camera and lighting before exporting variations, then test a small batch at thumbnail size',
+    screenshotTitle: '3D render layer plan',
+    screenshotSteps: ['Camera lock', 'Materials', 'Props', 'Alpha PNG', 'Preview', 'Export'],
+  },
+  {
+    title: 'NFT Metadata Checklist Before You Mint or Upload',
+    category: 'Metadata QA',
+    excerpt: 'Catch naming, image link, attribute, supply, and backup issues before your collection goes public.',
+    audience: 'creators preparing final files for IPFS, Arweave, marketplace upload, or smart contract deployment',
+    outcome: 'metadata that is easier to upload, easier to inspect, and less likely to create launch-day surprises',
+    example: 'checking that token 0421 has the correct image, clean attributes, and the same naming format as the rest',
+    commonMistake: 'uploading metadata with local image paths or inconsistent trait categories that marketplaces cannot group well',
+    proTip: 'open 20 random JSON files manually and compare them with the matching images before the final upload',
+    screenshotTitle: 'Metadata QA checklist',
+    screenshotSteps: ['Names', 'Images', 'Traits', 'Links', 'Supply', 'Backup'],
+  },
+  {
+    title: 'How to Avoid Bad Trait Combinations in Generative NFT Art',
+    category: 'Rules',
+    excerpt: 'Use clean visual rules to prevent awkward overlaps, hidden faces, broken props, and combinations that weaken the collection.',
+    audience: 'artists who want random generation to stay surprising without producing broken-looking NFTs',
+    outcome: 'a rule system that protects visual quality while still leaving enough room for interesting variation',
+    example: 'a full-face mask hiding the Mouth layer, or a large crown excluding tall hair',
+    commonMistake: 'using rules to fix fragile artwork instead of adjusting traits so they work with more combinations',
+    proTip: 'write down why each rule exists so future edits do not accidentally break the art direction',
+    screenshotTitle: 'Trait rule examples',
+    screenshotSteps: ['Find issue', 'Add rule', 'Hide layer', 'Preview', 'Adjust', 'Approve'],
+  },
+  {
+    title: 'How to Organize NFT Collection Files Before Launch',
+    category: 'Production',
+    excerpt: 'Create a simple folder system for source art, layers, test exports, final images, metadata, backups, and launch assets.',
+    audience: 'solo creators and small teams who need fewer file mistakes during production and launch',
+    outcome: 'a project folder that separates drafts from final files and keeps exports easy to verify',
+    example: 'folders for Source, Layers, Test Exports, Final Images, Metadata, Project Config, Marketing, and Backups',
+    commonMistake: 'mixing test exports with final launch files and later uploading the wrong batch by accident',
+    proTip: 'number your folders in production order so collaborators can understand the project without a long explanation',
+    screenshotTitle: 'Project folder structure',
+    screenshotSteps: ['Source', 'Layers', 'Tests', 'Finals', 'Metadata', 'Backups'],
+  },
+  {
+    title: 'How to Make Common NFTs Look Good, Not Like Filler',
+    category: 'Art Direction',
+    excerpt: 'Design common outputs with enough polish and personality so the whole collection feels worth collecting.',
+    audience: 'creators who want the full collection to look intentional, not only the rarest one percent',
+    outcome: 'common NFTs that still feel clean, collectible, and representative of the project identity',
+    example: 'well-designed base outfits, balanced backgrounds, and mid-tier traits that appear often enough to add variety',
+    commonMistake: 'putting all visual interest into ultra-rare traits and leaving most generated pieces looking unfinished',
+    proTip: 'review a batch of common-looking outputs without rare effects and ask if you would still share them publicly',
+    screenshotTitle: 'Common output review',
+    screenshotSteps: ['Base art', 'Color', 'Silhouette', 'Preview', 'Compare', 'Approve'],
+  },
+  {
+    title: 'How to Export Marketplace-Ready NFT Images and Metadata',
+    category: 'Export',
+    excerpt: 'Prepare final images, JSON metadata, batches, names, backups, and upload checks for a smoother NFT launch.',
+    audience: 'artists and teams getting ready to move from generation to storage, marketplace setup, or contract work',
+    outcome: 'a clean export package with images, JSON metadata, DNA data, project settings, and backup files',
+    example: 'a 5,000 item collection exported in smaller ZIP batches with matching image and metadata numbers',
+    commonMistake: 'exporting one huge folder and discovering missing files, wrong names, or broken image links too late',
+    proTip: 'review image and metadata pairs together before uploading anything to permanent storage',
+    screenshotTitle: 'Export settings',
+    screenshotSteps: ['Supply', 'Format', 'Images', 'JSON', 'ZIP', 'Review'],
+  },
+  {
+    title: 'How to Review an NFT Collection Before Publishing',
+    category: 'Quality Review',
+    excerpt: 'A simple review process for checking thumbnails, duplicates, rarity spread, broken combinations, and final export quality.',
+    audience: 'creators who want a calmer review process before announcing a public drop',
+    outcome: 'a collection that has been checked visually, statistically, and structurally before upload',
+    example: 'reviewing 300 previews, filtering rarity tiers, checking duplicate-looking outputs, and testing export files',
+    commonMistake: 'only checking the rarest outputs and missing problems that appear across common items',
+    proTip: 'review quickly first for obvious issues, then slowly for metadata and trait consistency',
+    screenshotTitle: 'Pre-launch review board',
+    screenshotSteps: ['Thumbnails', 'Rarity', 'Rules', 'Duplicates', 'Metadata', 'Final pass'],
+  },
+  {
+    title: 'How Small Teams Can Build a Faster NFT Production Workflow',
+    category: 'Team Workflow',
+    excerpt: 'A practical production workflow for small creative teams that need shared naming, review habits, and export discipline.',
+    audience: 'small studios, brand teams, and Web3 communities coordinating art, review, and launch tasks',
+    outcome: 'a shared process that keeps artwork decisions, rarity changes, exports, and backups easy to track',
+    example: 'one artist owns layers, one reviewer checks previews, and one operator handles final exports and metadata upload',
+    commonMistake: 'letting everyone rename files, change weights, and export builds without a shared checklist',
+    proTip: 'assign one final-export owner so the launch package stays consistent and easy to audit',
+    screenshotTitle: 'Team handoff workflow',
+    screenshotSteps: ['Create', 'Name', 'Import', 'Review', 'Export', 'Handoff'],
+  },
+];
+
+const buildTutorialParagraphs = (topic: TutorialTopic): string[] => [
+  `${topic.title} is written for ${topic.audience}. The goal is simple: help you move from an idea to a cleaner, more reliable NFT collection without needing a large technical team. GenMatrix is useful because it keeps the generation process in the browser while still giving you practical controls for layers, rarity, previews, rules, and export. Before you start, think about the final collector experience. A collector will not see your messy folders, test files, or production notes. They will see the final image, the trait names, the metadata, and the overall quality of the collection. This tutorial focuses on ${topic.outcome}.`,
+  `Begin with a small plan instead of a full production run. Write down the collection theme, the target supply, the main layer categories, and the kind of results you want to see. A useful example is ${topic.example}. This gives you a concrete structure to test. If the first small batch does not look right, do not continue into a full export. Fix the layer names, adjust the visual order, rebalance the odds, or simplify the idea. A small test saves far more time than repairing thousands of generated files after the fact.`,
+  `Keep the language in your files clear and collector-friendly. Layer names and trait names often become public metadata, so they should read like product labels, not internal file notes. Instead of names like final_v3_blue_asset.png, use names that a collector can understand. Good naming also helps your team review the project faster. When names are clean, it is easier to spot missing files, duplicate concepts, or traits that do not belong in the collection. Clear names are a small habit that improves the entire launch process.`,
+  `The most common mistake in this area is ${topic.commonMistake}. This usually happens when creators rush from artwork to export without a review stage. The fix is to create a quick test loop. Import a small set of layers, generate a preview batch, review the results at thumbnail size, then make changes. Repeat this loop until the collection feels stable. Thumbnail review matters because most collectors first see NFTs in a grid, not as full-resolution files. If the design is readable in a grid, it will usually feel stronger on marketplaces and social posts.`,
+  `Use rules and rarity settings as art direction tools, not just technical settings. Rarity controls decide how often traits appear, but they also affect how crowded or clean the final images feel. Rules prevent combinations that look wrong. If a large hat covers the eyes, block that pair. If a mask replaces the mouth, hide the mouth layer. If an accessory only works with one body type, force the match or redraw the accessory so it works more broadly. The best collections use rules to protect quality while still allowing surprise.`,
+  `A good review process has three passes. First, scan quickly for obvious visual problems such as broken alignment, harsh color clashes, or missing layers. Second, review the rarity spread and make sure common outputs still look good. Third, open final image and metadata pairs together. Check that the visible traits match the JSON attributes, that the name format is consistent, and that the description is ready for public display. This process may sound slow, but it is much faster than fixing a public launch after collectors notice an issue.`,
+  `For teams working toward a marketplace upload or contract deployment, export discipline matters. Keep test exports separate from final exports. Save project settings, DNA data, image batches, and metadata batches together. Back up the final package before uploading it anywhere. If you later need to verify a token, update image links, or regenerate a batch, those files become essential. A clean export folder gives you confidence and makes it easier for developers, collaborators, or marketplace support to understand the project.`,
+  `A practical tip: ${topic.proTip}. This is the kind of small decision that improves the entire production workflow. GenMatrix can generate the combinations, but it cannot replace judgment. Your role is to decide what looks right, what should be rare, what should never appear together, and what story the collection should tell. The stronger your decisions are before export, the more professional the final collection will feel.`,
+  `When you are ready, generate a larger test batch and review it as if you were a collector seeing the project for the first time. Ask simple questions: Is the theme clear? Do common pieces still look good? Are rare pieces exciting without looking messy? Is the metadata easy to read? Are the files organized well enough to upload? If the answer is yes, you are ready to move toward the final export. If not, adjust the layers, rules, and weights before scaling up. The best NFT production workflow is not about rushing. It is about making each step clear enough that the final launch feels calm, polished, and easy to trust.`,
+];
+
+const TutorialScreenshot = ({ topic }: { topic: TutorialTopic }) => (
+  <figure className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-950 shadow-xl">
+    <div className="border-b border-gray-800 bg-gray-900 px-4 py-3">
+      <div className="flex items-center justify-between gap-3">
+        <figcaption className="text-sm font-bold text-gray-200">{topic.screenshotTitle}</figcaption>
+        <span className="rounded-full border border-indigo-500/40 bg-indigo-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-indigo-200">Screenshot</span>
+      </div>
+    </div>
+    <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3">
+      {topic.screenshotSteps.map((step, index) => (
+        <div key={step} className="rounded-xl border border-gray-800 bg-gray-900 p-3">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="h-2.5 w-2.5 rounded-full bg-indigo-400" />
+            <span className="text-[10px] font-bold text-gray-600">0{index + 1}</span>
+          </div>
+          <div className="mb-2 h-12 rounded-lg bg-gradient-to-br from-indigo-500/30 via-slate-700 to-pink-500/20" />
+          <p className="text-xs font-semibold text-gray-300">{step}</p>
+        </div>
+      ))}
+    </div>
+  </figure>
+);
+
 const GenMatrixShell = () => {
   const [sitePage, setSitePage] = useState<SitePage>('home');
   const navItems: { id: SitePage; label: string }[] = [
     { id: 'home', label: 'Home' },
     { id: 'generator', label: 'Generator' },
     { id: 'guide', label: 'How It Works' },
+    { id: 'tutorials', label: 'Tutorials' },
     { id: 'legal', label: 'Privacy & Terms' },
   ];
 
@@ -2321,7 +2517,7 @@ const GenMatrixShell = () => {
             </span>
           </button>
 
-          <nav className="hidden items-center gap-1 rounded-xl border border-gray-800 bg-gray-900 p-1.5 md:flex">
+          <nav className="hidden items-center gap-1 rounded-xl border border-gray-800 bg-gray-900 p-1.5 lg:flex">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -2337,7 +2533,7 @@ const GenMatrixShell = () => {
 
           <button
             onClick={launchGenerator}
-            className="hidden items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:from-indigo-500 hover:to-violet-500 sm:flex"
+            className="hidden items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:from-indigo-500 hover:to-violet-500 lg:flex"
           >
             <span>Open Generator</span>
             <ArrowRight size={16} />
@@ -2475,6 +2671,84 @@ const GenMatrixShell = () => {
             </div>
           </section>
 
+          <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+            <div className="flex flex-col justify-between gap-6 border-t border-gray-900 pt-12 md:flex-row md:items-end">
+              <div>
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-800/70 bg-indigo-950/60 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-indigo-300">
+                  <BookOpen size={14} />
+                  Creator Tutorials
+                </div>
+                <h2 className="max-w-3xl text-3xl font-black tracking-tight text-white sm:text-4xl">Learn the full NFT collection workflow before you export.</h2>
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-gray-400">
+                  Read practical guides on layered artwork, rarity, metadata formats, 10K launches, 3D renders, and final file checks.
+                </p>
+              </div>
+              <button onClick={() => setSitePage('tutorials')} className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-black text-gray-950 transition-all hover:bg-gray-100">
+                Browse Tutorials
+                <ArrowRight size={16} />
+              </button>
+            </div>
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+              {tutorialTopics.slice(0, 3).map((topic) => (
+                <button key={topic.title} onClick={() => setSitePage('tutorials')} className="rounded-2xl border border-gray-800 bg-gray-900/45 p-5 text-left transition-all hover:border-indigo-500/50 hover:bg-gray-900">
+                  <div className="mb-3 text-xs font-bold uppercase tracking-wide text-indigo-300">{topic.category}</div>
+                  <h3 className="mb-3 text-lg font-black text-white">{topic.title}</h3>
+                  <p className="text-sm leading-relaxed text-gray-400">{topic.excerpt}</p>
+                </button>
+              ))}
+            </div>
+          </section>
+
+        </main>
+      )}
+
+      {sitePage === 'tutorials' && (
+        <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-800/70 bg-indigo-950/60 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-indigo-300">
+              <BookOpen size={14} />
+              Tutorials & Creator Guides
+            </div>
+            <h1 className="mb-4 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-5xl">Build better NFT collections with clear, practical guides.</h1>
+            <p className="max-w-3xl leading-relaxed text-gray-400">
+              These original tutorials are written for artists, studios, and small teams who want simple English guidance on artwork layers, rarity, metadata, exports, and collection launches. Each guide includes a screenshot-style workflow panel and a full long-form article.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-2 xl:grid-cols-3">
+            {tutorialTopics.map((topic, index) => (
+              <a key={topic.title} href={`#tutorial-${index + 1}`} className="rounded-2xl border border-gray-800 bg-gray-900/45 p-5 transition-all hover:border-indigo-500/50 hover:bg-gray-900">
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <span className="text-xs font-bold uppercase tracking-wide text-indigo-300">{topic.category}</span>
+                  <span className="text-xs text-gray-500">800+ words</span>
+                </div>
+                <h2 className="mb-3 text-lg font-black text-white">{topic.title}</h2>
+                <p className="text-sm leading-relaxed text-gray-400">{topic.excerpt}</p>
+              </a>
+            ))}
+          </div>
+
+          <div className="space-y-8">
+            {tutorialTopics.map((topic, index) => (
+              <article id={`tutorial-${index + 1}`} key={topic.title} className="scroll-mt-28 rounded-2xl border border-gray-800 bg-gray-900/35 p-5 sm:p-8">
+                <div className="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-start">
+                  <div className="lg:col-span-7">
+                    <div className="mb-3 text-xs font-bold uppercase tracking-wide text-indigo-300">{topic.category}</div>
+                    <h2 className="mb-4 text-3xl font-black tracking-tight text-white">{topic.title}</h2>
+                    <p className="text-base leading-relaxed text-gray-400">{topic.excerpt}</p>
+                  </div>
+                  <div className="lg:col-span-5">
+                    <TutorialScreenshot topic={topic} />
+                  </div>
+                </div>
+                <div className="space-y-5 text-sm leading-7 text-gray-300 sm:text-base sm:leading-8">
+                  {buildTutorialParagraphs(topic).map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </main>
       )}
 
