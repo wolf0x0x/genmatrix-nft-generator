@@ -2821,7 +2821,7 @@ const GenMatrixShell = () => {
       {sitePage !== 'generator' && (
         <>
           <div className="mx-auto max-w-7xl px-4 pb-8 pt-4 sm:px-6 lg:px-8">
-            <AdPlaceholder label="Advertisement (Bottom Banner 728x90)" className="h-28" />
+            <AdPlaceholder label="Sponsored Space" className="h-28" />
           </div>
           <footer className="border-t border-gray-900 bg-gray-950 py-10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
