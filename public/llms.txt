@@ -14,4 +14,4 @@ Primary topics:
 The app runs locally in the browser. Imported artwork stays on the user's device unless the user exports or uploads files elsewhere.
 
 Canonical URL:
-https://wolf0x0x.github.io/genmatrix-nft-generator/
+https://genmatrix.xyz/
